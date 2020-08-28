@@ -7,9 +7,16 @@ export default class Star extends cc.Component {
     @property(cc.Integer) private pickRadius: number = 0;
 
     private game: Game = null;
+    private timer: number = 0;
+    private deadTime: number = 0;
 
-    public init(game: Game){
+    // protected onLoad(){
+    //     this.timer = 0;
+    // }
+
+    public init(game: Game, time: number){
         this.game = game;
+        this.deadTime = time;
     }
 
     private getDistance(){
@@ -28,5 +35,8 @@ export default class Star extends cc.Component {
         if(this.getDistance() < this.pickRadius){
             this.onPicked();
         }
+        this.timer += dt;
+        //实现渐隐效果
+        this.node.opacity = 255*(1- this.timer/this.deadTime);
     }
 }

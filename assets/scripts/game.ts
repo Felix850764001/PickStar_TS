@@ -33,6 +33,7 @@ export class Game extends cc.Component {
         this.spawnNewStar();
         //初始化计分
         this.score = 0;
+        console.log(this.node.width);
     }
 
     //生成一个新星星
@@ -40,7 +41,7 @@ export class Game extends cc.Component {
         let newStar = cc.instantiate(this.starPrefab);
         newStar.parent = this.node;
         //将game组件传入star实例中
-        newStar.getComponent('star').init(this);
+        newStar.getComponent('star').init(this, this.maxDuration);
         newStar.setPosition(this.getNewStarPosition());
         this.starDuration = this.minDuration + Math.random()*(this.maxDuration - this.minDuration);
         this.timer = 0;
@@ -51,7 +52,7 @@ export class Game extends cc.Component {
         //根据地面高度和主角跳跃高度，随机生成一个Y
         let randY = this.groundY + Math.random()*this.player.getComponent('player').jumpHeight + 50;
         //根据屏幕宽度 随机生成一个randX
-        let randX = Math.random() * this.node.width;
+        let randX = Math.random() * this.node.width -(this.node.width/2);
         return cc.v2(randX, randY);
     }
 
