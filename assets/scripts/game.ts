@@ -38,8 +38,10 @@ export class Game extends cc.Component {
     //生成一个新星星
     public spawnNewStar(){
         let newStar = cc.instantiate(this.starPrefab);
-        newStar.setPosition(this.getNewStarPosition());
         newStar.parent = this.node;
+        //将game组件传入star实例中
+        newStar.getComponent('star').init(this);
+        newStar.setPosition(this.getNewStarPosition());
         this.starDuration = this.minDuration + Math.random()*(this.maxDuration - this.minDuration);
         this.timer = 0;
     }

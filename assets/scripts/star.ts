@@ -8,6 +8,10 @@ export default class Star extends cc.Component {
 
     private game: Game = null;
 
+    public init(game: Game){
+        this.game = game;
+    }
+
     private getDistance(){
         let playPos = this.game.player.getPosition();
         let dis = playPos.sub(this.node.getPosition()).mag();
